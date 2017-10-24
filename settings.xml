@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (C) Schweizerische Bundesbahnen SBB, 2017.
+  -->
+<settings>
+<servers>
+    <server>
+        <id>ossrh</id>
+        <username>${env.OSSRH_USER_TOKEN}</username>
+        <password>${env.OSSRH_PWD_TOKEN}</password>
+    </server>
+</servers>
+<profiles>
+    <profile>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <!--<gpg.keyname>${env.GPG_KEY}</gpg.keyname>
+            <gpg.passphrase>${env.GPG_PWD}</gpg.passphrase>-->
+            <gpg.defaultKeyring>false</gpg.defaultKeyring>
+            <gpg.useagent>true</gpg.useagent>
+            <gpg.lockMode>never</gpg.lockMode>
+            <gpg.homedir>/cygdrive/c/Program Files (x86)/gnupg/bin/gpg</gpg.homedir>
+            <gpg.publicKeyring>/c/Users/ue64007/AppData/Roaming/gnupg/pubring.gpg</gpg.publicKeyring>
+            <gpg.secretKeyring>/c/Users/ue64007/AppData/Roaming/gnupg/secring.gpg</gpg.secretKeyring>
+        </properties>
+    </profile>
+</profiles>
+</settings>
