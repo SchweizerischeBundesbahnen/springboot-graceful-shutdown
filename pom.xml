@@ -2,15 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
 
     <groupId>ch.sbb</groupId>
     <artifactId>springboot-graceful-shutdown</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>This springboot autoconfigured plugin offers the possibility to shutdown your springboot app
     gracefully, by first make the app unhealthy over the actuator healthcheck and then shutdown the context</description>
@@ -30,10 +25,11 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/SchweizerischeBundesbahnen/springboot-graceful-shutdown.git</connection>
+        <connection>scm:git://github.com/SchweizerischeBundesbahnen/springboot-graceful-shutdown.git</connection>
         <developerConnection>scm:git:ssh://github.com/SchweizerischeBundesbahnen/springboot-graceful-shutdown.git</developerConnection>
         <url>https://github.com/SchweizerischeBundesbahnen/springboot-graceful-shutdown.git</url>
     </scm>
+
 
     <developers>
         <developer>
@@ -43,6 +39,7 @@
             <organizationUrl>http://www.sbb.ch</organizationUrl>
         </developer>
     </developers>
+
 
     <dependencies>
         <dependency>
@@ -78,7 +75,7 @@
 
     <build>
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.1</version>
@@ -138,7 +135,7 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
@@ -147,5 +144,9 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 </project>

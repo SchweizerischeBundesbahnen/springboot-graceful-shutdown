@@ -30,7 +30,9 @@ Add the maven dependency for Springboot actuator and the graceful shutdown
         <version>X.X.X</version>
     </dependency>
     <dependency>
-    ..
+        <groupId>ch.sbb</groupId>
+        <artifactId>springboot-graceful-shutdown</artifactId>
+        <version>X.X</version>
     </dependency>
 ```
 
