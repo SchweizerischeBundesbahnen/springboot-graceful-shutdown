@@ -60,6 +60,24 @@ If you do a rolling deployment, the risk of having failing servicecalls is with 
 And still it can happen that servicecalls fail because of the Openshift internal routing, networkproblems, 
 or any other component between service caller and service host.
 
+Releasing
+--
+If you want to create a new release, you need to do following steps:
+1. Generate your PGP Keys with Gnugpg: gpg --gen-key
+2. Publish your PGP Key to a public server: gpg --keyserver keyserver.ubuntu.com --send-key YOURKEYID
+2. Copy the prepared Maven settings.xml from this repo to your Maven home directory
+3. Adjust all the user and password configurations in the settings.xml
+4. You find the sonatype credentials on the protected passwordpage of the SBB ESTA Team 
+5. Adjust the version in the pom.xml -SNAPSHOT for a snapshot deployment, without the -SNAPSHOT for the release deployment.
+6. Execute mvn clean deploy
+7. If the build was successful, check oss.sonatype.org if your version was published
+8. In case of troubles contact the Repoowner
+
+
+**Be aware that releasing behind the proxy might not work because they blocked the URL.
+                In SBB I needed to publish the release from outside of the Proxy. The SNAPSHOT publishing worked behind the proxy.**
+
+
 Credits
 --
 This Shutdownhook was created, maintained and used by SBB (Schweizerische Bundesbahnen) team ESTA in Switzerland. 

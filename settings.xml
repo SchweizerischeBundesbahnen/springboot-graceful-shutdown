@@ -1,0 +1,51 @@
+<!--
+  ~ Copyright (C) Schweizerische Bundesbahnen SBB, 2017.
+  -->
+
+
+<!--
+This Settings File needs to be copied into your Maven Home directory
+which is on an SBB Windows Machine C:\Users\uXXXXX\.m2\settings.xml
+-->
+<settings __NS1:xmlns="http://maven.apache.org/SETTINGS/1.0.0" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:__NS1="http://www.w3.org/2000/xmlns/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <proxies>
+        <proxy>
+            <id>id</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <!-- !!!! Be aware that releasing behind the proxy might not work because they blocked the URL.
+                In SBB I needed to publish the release from outside of the Proxy. The SNAPSHOT worked. -->
+            <!-- Adjust your Proxyuser -->
+            <username>YOUR PROXY USER</username>
+            <password>YOUR PROXY PASSWORT</password>
+            <host>webproxy.sbb.ch</host>
+            <port>8080</port>
+            <nonProxyHosts>sbb.ch</nonProxyHosts>
+        </proxy>
+    </proxies>
+    <servers>
+        <server>
+            <id>ossrh</id>
+
+            <!-- Adjust Sonatype User -->
+            <username>THE SBB SONATYPE USER</username>
+            <password>THE SBB SONATYPE PASSWORD</password>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Adjust your pgp passphrase -->
+                <gpg.passphrase>PUT IN YOUR PGP PASSPHRASE</gpg.passphrase>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.defaultKeyring>true</gpg.defaultKeyring>
+                <gpg.useagent>false</gpg.useagent>
+                <gpg.lockMode>never</gpg.lockMode>
+            </properties>
+        </profile>
+    </profiles>
+</settings>
