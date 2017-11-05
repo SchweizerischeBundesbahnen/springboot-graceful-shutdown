@@ -4,8 +4,8 @@
 
 package ch.sbb.esta.openshift.gracefullshutdown;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 
@@ -20,7 +20,7 @@ import org.springframework.boot.actuate.health.HealthIndicator;
  * removing it from the service.
  */
 public class GracefulShutdownHealthCheck implements HealthIndicator, IProbeController {
-    Logger log = LoggerFactory.getLogger(GracefulShutdownHealthCheck.class.getName());
+    private static final Log log = LogFactory.getLog(GracefulShutdownHealthCheck.class);
 
     public static final String GRACEFULSHUTDOWN = "Gracefulshutdown";
     private Health health;
