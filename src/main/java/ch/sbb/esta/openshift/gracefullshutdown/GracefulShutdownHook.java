@@ -4,8 +4,8 @@
 
 package ch.sbb.esta.openshift.gracefullshutdown;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.util.StringUtils;
 
@@ -32,7 +32,8 @@ import java.util.Map;
 class GracefulShutdownHook implements Runnable {
     protected static final String GRACEFUL_SHUTDOWN_WAIT_SECONDS = "estaGracefulShutdownWaitSeconds";
     private static final String DEFAULT_GRACEFUL_SHUTDOWN_WAIT_SECONDS = "20";
-    private static Logger log = LoggerFactory.getLogger(GracefulShutdownHook.class.getName());
+
+    private static final Log log = LogFactory.getLog(GracefulShutdownHook.class);
 
     private final ConfigurableApplicationContext applicationContext;
 
