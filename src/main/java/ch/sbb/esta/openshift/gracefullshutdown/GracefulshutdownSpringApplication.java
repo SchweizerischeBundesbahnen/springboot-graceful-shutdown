@@ -5,7 +5,7 @@
 package ch.sbb.esta.openshift.gracefullshutdown;
 
 
-
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -15,10 +15,10 @@ import org.springframework.context.ConfigurableApplicationContext;
  * the interface {@link IProbeController}
  */
 public class GracefulshutdownSpringApplication {
-    public static void run(Class<?> appClazz, String[] args) {
-        org.springframework.boot.SpringApplication app = new org.springframework.boot.SpringApplication(appClazz);
+    public static void run(Class<?> appClazz, String... args) {
+        SpringApplication app = new SpringApplication(appClazz);
         app.setRegisterShutdownHook(false);
-        ConfigurableApplicationContext applicationContext = app.run();
+        ConfigurableApplicationContext applicationContext = app.run(args);
         Runtime.getRuntime().addShutdownHook(new Thread(new GracefulShutdownHook(applicationContext)));
     }
 }
