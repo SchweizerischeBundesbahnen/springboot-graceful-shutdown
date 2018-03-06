@@ -4,7 +4,6 @@
 
 package ch.sbb.esta.openshift.gracefullshutdown;
 
-import org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMapping;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * package is present.
  */
 @Configuration
-@ConditionalOnClass(EndpointHandlerMapping.class)
+@ConditionalOnClass(HealthIndicator.class)
 public class GracefulShutdownAutoConfiguration {
     @Bean
     HealthIndicator gracefulShutdownHealthCheck() {
