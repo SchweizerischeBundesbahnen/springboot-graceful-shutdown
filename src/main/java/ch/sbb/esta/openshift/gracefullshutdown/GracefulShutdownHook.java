@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author ue64007
  */
-class GracefulShutdownHook implements Runnable {
+public class GracefulShutdownHook implements Runnable {
     protected static final String GRACEFUL_SHUTDOWN_WAIT_SECONDS = "estaGracefulShutdownWaitSeconds";
     private static final String DEFAULT_GRACEFUL_SHUTDOWN_WAIT_SECONDS = "20";
 
@@ -37,7 +37,7 @@ class GracefulShutdownHook implements Runnable {
 
     private final ConfigurableApplicationContext applicationContext;
 
-    GracefulShutdownHook(ConfigurableApplicationContext applicationContext) {
+    public GracefulShutdownHook(ConfigurableApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
