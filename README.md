@@ -1,21 +1,21 @@
-Springboot-Graceful-Shutdown for Openshift/Kubernetes
+Springboot-Graceful-Shutdown for OpenShift/Kubernetes
 =
-The Springboot-Graceful-Shutdown enables your spring boot application to do a rolling deployment without any downtime on Openshift.
-We (SBB) use this in a dockerized Cloud environment on Openshift - it should also work on Kubernetes.
-We use here the terminology of Openshift/Kubernetes: Pods (roughly containers) and Services (logical load balancers that combine N containers).
-Openshift needs to know when a Pod is ready to respond to requests. That is done via the readyness probe.
-As soon as the readyness probe of a Pod fails, Openshift takes the Pod off the service, so user requests are no longer sent to this Pod.  
+The Springboot-Graceful-Shutdown enables your spring boot application to do a rolling deployment without any downtime on OpenShift.
+We (SBB) use this in a dockerized Cloud environment on OpenShift - it should also work on Kubernetes.
+We use here the terminology of OpenShift/Kubernetes: Pods (roughly containers) and Services (logical load balancers that combine N containers).
+OpenShift needs to know when a Pod is ready to respond to requests. That is done via the readiness probe.
+As soon as the readiness probe of a Pod fails, OpenShift takes the Pod off the service, so user requests are no longer sent to this Pod.  
 
 Graceful Shutdown Workflow
 --
 Here is an example of how the graceful shutdown workflow works:
-1. **Openshift sends the Pod the SIGTERM signal** which tells the Docker instance to shutdown all its processes. 
-This can happen when scaling down a Pod by hand or automatically during a rolling deployment of Openshift.
-2. The JVM receives the SIGTERM signal and the graceful shutdown hook sets the **readyness probe to false**
+1. **OpenShift sends the Pod the SIGTERM signal** which tells the Docker instance to shutdown all its processes. 
+This can happen when scaling down a Pod by hand or automatically during a rolling deployment of OpenShift.
+2. The JVM receives the SIGTERM signal and the graceful shutdown hook sets the **readiness probe to false**
 3. The **process waits for a defined time to initiate the shutdown of the spring context**, e.g. for 20 seconds. 
-This time is needed for Openshift to detect that the Pod is no longer ready and to remove the pod from the service. 
-The readyness probe check interval must in this case be configured to be less than 20 seconds.
-4. Openshift removes the Pod from the Service.
+This time is needed for OpenShift to detect that the Pod is no longer ready and to remove the pod from the service. 
+The readiness probe check interval must in this case be configured to be less than 20 seconds.
+4. OpenShift removes the Pod from the Service.
 5. After the configured wait time, for example 20 seconds, the spring context will be shut down. Open transactions will be properly finished. 
 6. After the Spring Boot application is shutdown, the liveness probe will automatically be set to false. 
 7. Pod is shutdown and removed.
@@ -54,11 +54,11 @@ public class EstaGracefullshutdownTesterApp {
 - **System Property**: -DestaGracefulShutdownWaitSeconds=30
 
 
-Start now your application and point your readyness probe to ```http://yourhost:8282/health``` and set the check interval lower than the shutdown delay, for example, to 10 seconds.
+Start now your application and point your readiness probe to ```http://yourhost:8282/health``` and set the check interval lower than the shutdown delay, for example, to 10 seconds.
 In your developement environment (Eclipse or IntelliJ) you can simulate a SIGTERM: For this use the _exit_ operation (do not terminate it via the stop icon). Then check what 
 happens with the health check and the shutdown of the spring context.
 
-If you want to implement your own readyness check implement your RestController with the **ch.sbb.esta.openshift.gracefullshutdown.IProbeController** interface.
+If you want to implement your own readiness check implement your RestController with the **ch.sbb.esta.openshift.gracefullshutdown.IProbeController** interface.
 
 
 Other Graceful Shutdown implementation for Spring Boot:
@@ -69,7 +69,7 @@ Other Graceful Shutdown implementation for Spring Boot:
 Good to know
 --
 If you do a rolling deployment, the risk of having failing service calls is minimized with this strategy. 
-It is still possible that service calls fail because of the Openshift internal routing, network issues, 
+It is still possible that service calls fail because of the OpenShift internal routing, network issues, 
 or other components between service caller and service host.
 
 Releasing (internal)
