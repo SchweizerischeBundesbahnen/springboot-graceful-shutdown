@@ -6,6 +6,11 @@ We use here the terminology of OpenShift/Kubernetes: Pods (roughly containers) a
 OpenShift needs to know when a Pod is ready to respond to requests. That is done via the readiness probe.
 As soon as the readiness probe of a Pod fails, OpenShift takes the Pod off the service, so user requests are no longer sent to this Pod.  
 
+Gracefulshutdown in Springboot 2.3
+--
+In Springboot Version 2.3 Graceful shutdown is implemented out of the box. We didn't test it yet, but suggest you to at least try it out, because it wouldn't need the dependency to this project:
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#new-and-noteworthy
+
 Graceful Shutdown Workflow
 --
 Here is an example of how the graceful shutdown workflow works:
