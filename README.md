@@ -43,7 +43,7 @@ How to use it
 
 2. Start your application with the alternative method ```GracefulshutdownSpringApplication.run``` instead of ```SpringApplication.run```, e.g. 
 
-```
+```java
 @SpringBootApplication
 public class EstaGracefullshutdownTesterApp {
 
